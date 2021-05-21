@@ -1,0 +1,37 @@
+:root {
+	font-size: 112.5%;
+}
+
+html,
+body,
+#root,
+.App {
+	height: 100%;
+	margin: 0;
+}
+
+h1 {
+	font-family: Rubik, sans-serif;
+	font-weight: 400;
+	display: block;
+	color: white;
+	margin: 0;
+	/* border: 1px solid salmon; */
+}
+
+.dash {
+	background-image: url('./images/pattern-bg.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+	background-size: cover;
+	height: 35%;
+}
+
+.map {
+	background-color: gray;
+	height: 65%;
+}
+/* .map h1 {
+	text-align: center;
+} */

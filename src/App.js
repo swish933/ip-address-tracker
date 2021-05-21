@@ -1,9 +1,13 @@
 import './App.css';
+import Dash from './components/Dash';
 
 function App() {
 	return (
 		<div className='App'>
-			<h1>Hello</h1>
+			<div className='dash'>
+				<Dash />
+			</div>
+			<div className='map'></div>
 		</div>
 	);
 }
