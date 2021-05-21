@@ -6,7 +6,6 @@ import {
 	search,
 	searchContainer,
 	icon,
-	form,
 } from '../css/Search.module.css';
 
 const Search = () => {
