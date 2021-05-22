@@ -26,12 +26,9 @@ h1 {
 	position: relative;
 	background-size: cover;
 	height: 35%;
+	z-index: 999;
 }
 
 .map {
-	background-color: gray;
 	height: 65%;
 }
-/* .map h1 {
-	text-align: center;
-} */
