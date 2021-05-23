@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { LatLngExpression } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import markerIcon from '../images/icon-arrow.svg';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 const Map = () => {
 	const position = [51.505, -0.09];
