@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-// import { LatLngExpression } from 'leaflet';
-import markerIcon from '../images/icon-arrow.svg';
+import React from 'react';
+import { icon } from '../util';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 const Map = () => {
+	// const [position, setPosition] = useState([51.505, -0.09]);
 	const position = [51.505, -0.09];
 	return (
 		<MapContainer
@@ -19,7 +19,7 @@ const Map = () => {
 				id='mapbox/streets-v11'
 				accessToken='pk.eyJ1Ijoibm9tc29pa2VtIiwiYSI6ImNrb3lkMTFmcTBnejQyb21zaXFlcjJjb28ifQ.2sxggqMTXrti_eP4gooHAw'
 			/>
-			<Marker position={position}></Marker>
+			<Marker position={position} icon={icon}></Marker>
 		</MapContainer>
 	);
 };

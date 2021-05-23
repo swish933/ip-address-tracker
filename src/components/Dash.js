@@ -1,7 +1,7 @@
 import Search from './Search';
 import Info from './Info';
 
-const Dash = () => {
+const Dash = ({ input, onSubmit }) => {
 	return (
 		<div>
 			<Search />
