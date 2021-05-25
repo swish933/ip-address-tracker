@@ -5,26 +5,28 @@ import Dash from './components/Dash';
 import Map from './components/Map';
 
 function App() {
-	const [loading, setLoading] = useState(false);
+	const [loaded, setLoaded] = useState(false);
 	const [info, setInfo] = useState({});
 	const [ipAddr, setIpAddr] = useState('');
 
 	useEffect(
 		() =>
 			(async () => {
-				setLoading(true);
+				setLoaded(false);
 				let { ip, locationData } = await getIp();
 				setIpAddr(ip);
 				setInfo(locationData);
-				setLoading(false);
+				setLoaded(true);
 			})(),
 		[]
 	);
 
 	const onSubmit = async (addr) => {
+		setLoaded(false);
 		setIpAddr(addr);
 		let locationData = await getIpLocation(ipAddr);
 		setInfo(locationData);
+		setLoaded(true);
 	};
 
 	const { ip, isp, location } = info;
@@ -37,11 +39,11 @@ function App() {
 					ip={ip}
 					isp={isp}
 					location={location}
-					loaded={loading}
+					loaded={loaded}
 				/>
 			</div>
 			<div className='map'>
-				<Map location={location} />
+				<Map location={location} loaded={loaded} />
 			</div>
 		</div>
 	);

@@ -5,6 +5,7 @@
 	display: flex;
 	flex-flow: column;
 	width: 85%;
+	align-items: center;
 	max-width: 55em;
 	margin: 0 auto;
 	font-family: Rubik, sans-serif;

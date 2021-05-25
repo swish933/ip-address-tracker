@@ -3,7 +3,7 @@ import { icon } from '../util';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 const { REACT_APP_ACCESS_TOKEN } = process.env;
-const Map = () => {
+const Map = ({ loaded, location }) => {
 	// const [position, setPosition] = useState([51.505, -0.09]);
 	const position = [51.505, -0.09];
 	return (
