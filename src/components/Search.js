@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import arrow from '../images/icon-arrow.svg';
 import {
-	submit,
+	submitBtn,
 	searchInput,
 	search,
 	searchContainer,
 } from '../css/Search.module.css';
 
-const Search = () => {
+const Search = ({ Submit }) => {
 	const [input, setInput] = useState('');
 
-	const onSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		console.log(input);
-		// Api(input);
-
-		setInput('');
+		if (input) {
+			Submit(input);
+			setInput('');
+		}
 	};
 
 	return (
 		<div className={search}>
 			<h1>IP Address Tracker </h1>
 			<div className={searchContainer}>
-				<form onSubmit={onSubmit}>
+				<form onSubmit={handleSubmit}>
 					<input
 						className={searchInput}
 						type='text'
@@ -35,7 +34,7 @@ const Search = () => {
 							setInput(e.target.value);
 						}}
 					/>
-					<button type='submit' className={submit}>
+					<button type='submit' className={submitBtn}>
 						<img src={arrow} alt='submit-arrow-icon' />
 					</button>
 				</form>

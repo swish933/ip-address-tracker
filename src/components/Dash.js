@@ -1,10 +1,10 @@
 import Search from './Search';
 import Info from './Info';
 
-const Dash = ({ input, onSubmit }) => {
+const Dash = ({ input, Submit }) => {
 	return (
 		<div>
-			<Search />
+			<Search Submit={Submit} />
 			<Info />
 		</div>
 	);

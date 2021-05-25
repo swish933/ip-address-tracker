@@ -2,6 +2,7 @@ import React from 'react';
 import { icon } from '../util';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
+const { REACT_APP_ACCESS_TOKEN } = process.env;
 const Map = () => {
 	// const [position, setPosition] = useState([51.505, -0.09]);
 	const position = [51.505, -0.09];
@@ -17,7 +18,7 @@ const Map = () => {
 				zoomOffset={-1}
 				tileSize={512}
 				id='mapbox/streets-v11'
-				accessToken='pk.eyJ1Ijoibm9tc29pa2VtIiwiYSI6ImNrb3lkMTFmcTBnejQyb21zaXFlcjJjb28ifQ.2sxggqMTXrti_eP4gooHAw'
+				accessToken={REACT_APP_ACCESS_TOKEN}
 			/>
 			<Marker position={position} icon={icon}></Marker>
 		</MapContainer>
