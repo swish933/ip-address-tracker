@@ -7,32 +7,41 @@ import Map from './components/Map';
 function App() {
 	const [loading, setLoading] = useState(false);
 	const [info, setInfo] = useState({});
-	const [ip, setIp] = useState('');
+	const [ipAddr, setIpAddr] = useState('');
 
 	useEffect(
 		() =>
 			(async () => {
+				setLoading(true);
 				let { ip, locationData } = await getIp();
-
-				setIp(ip);
+				setIpAddr(ip);
 				setInfo(locationData);
+				setLoading(false);
 			})(),
 		[]
 	);
 
 	const onSubmit = async (addr) => {
-		let data = await getIpLocation(addr);
-		console.log(data);
-		setInfo({ ...data });
+		setIpAddr(addr);
+		let locationData = await getIpLocation(ipAddr);
+		setInfo(locationData);
 	};
+
+	const { ip, isp, location } = info;
 
 	return (
 		<div className='App'>
 			<div className='dash'>
-				<Dash Submit={onSubmit} ip={ip} info={info} />
+				<Dash
+					Submit={onSubmit}
+					ip={ip}
+					isp={isp}
+					location={location}
+					loaded={loading}
+				/>
 			</div>
 			<div className='map'>
-				<Map />
+				<Map location={location} />
 			</div>
 		</div>
 	);

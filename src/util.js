@@ -4,7 +4,7 @@ import publicIp from 'public-ip';
 
 const { REACT_APP_API_KEY } = process.env;
 
-const icon = new L.Icon({
+export const icon = new L.Icon({
 	iconUrl: markerIcon,
 	iconRetinaUrl: markerIcon,
 	iconAnchor: null,
@@ -16,7 +16,7 @@ const icon = new L.Icon({
 	className: 'markerIcon',
 });
 
-const getIp = async () => {
+export const getIp = async () => {
 	try {
 		let ip = await publicIp.v4();
 		let locationData = await getIpLocation(ip);
@@ -26,7 +26,7 @@ const getIp = async () => {
 	}
 };
 
-const getIpLocation = async (ip) => {
+export const getIpLocation = async (ip) => {
 	try {
 		const response = await fetch(
 			`https://geo.ipify.org/api/v1?apiKey=${REACT_APP_API_KEY}&ipAddress=${ip}`
@@ -41,5 +41,3 @@ const getIpLocation = async (ip) => {
 		console.log(err.message);
 	}
 };
-
-export { icon, getIp, getIpLocation };
