@@ -13,7 +13,7 @@ function App() {
 			(async () => {
 				try {
 					setLoaded(false);
-					let { data } = await getIp();
+					let data = await getIp();
 					setInfo(data);
 					setLoaded(true);
 				} catch (e) {
