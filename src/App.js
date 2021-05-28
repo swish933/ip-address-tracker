@@ -13,8 +13,8 @@ function App() {
 			(async () => {
 				try {
 					setLoaded(false);
-					let { locationData } = await getIp();
-					setInfo(locationData);
+					let { data } = await getIp();
+					setInfo(data);
 					setLoaded(true);
 				} catch (e) {
 					console.log(e.message);
@@ -25,8 +25,8 @@ function App() {
 
 	const onSubmit = async (addr) => {
 		setLoaded(false);
-		let locationData = await getIpLocation(addr);
-		setInfo(locationData);
+		let data = await getIpLocation(addr);
+		setInfo(data);
 		setLoaded(true);
 	};
 
