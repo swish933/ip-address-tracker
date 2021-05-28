@@ -18,11 +18,11 @@ export const icon = new L.Icon({
 
 export const getIp = async () => {
 	try {
-		let ip = await publicIp.v4();
+		let ip = (await publicIp.v4()) || (await publicIp.v6());
 		let locationData = await getIpLocation(ip);
 		return { ip, locationData };
 	} catch (err) {
-		console.error(err.message);
+		console.error(err.message, err.status);
 	}
 };
 

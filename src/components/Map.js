@@ -1,27 +1,51 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { icon } from '../util';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 
 const { REACT_APP_ACCESS_TOKEN } = process.env;
-const Map = ({ loaded, location }) => {
-	// const [position, setPosition] = useState([51.505, -0.09]);
-	const position = [51.505, -0.09];
+const defaultCenter = [0, 0];
+const defaultZoom = 4;
+
+const ChangeMapView = ({ coords }) => {
+	const map = useMap();
+	map.flyTo(coords, 14, { duration: 1.5 });
 	return (
-		<MapContainer
-			center={position}
-			zoom={13}
-			zoomControl={false}
-			style={{ width: '100%', height: '100%' }}>
-			<TileLayer
-				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-				url='https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
-				zoomOffset={-1}
-				tileSize={512}
-				id='mapbox/streets-v11'
-				accessToken={REACT_APP_ACCESS_TOKEN}
-			/>
-			<Marker position={position} icon={icon}></Marker>
-		</MapContainer>
+		<Marker icon={icon} position={coords}>
+			<Popup>You are here</Popup>
+		</Marker>
+	);
+};
+
+const Map = ({ loaded, lat, lng }) => {
+	const [position, setPosition] = useState([0, 0]);
+
+	useEffect(() => {
+		setPosition([lat, lng]);
+	}, [lat, lng]);
+
+	return (
+		<Fragment>
+			{loaded ? (
+				<MapContainer
+					center={defaultCenter}
+					zoom={defaultZoom}
+					zoomControl={false}
+					style={{ height: '100%' }}>
+					<TileLayer
+						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url='https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
+						zoomOffset={-1}
+						tileSize={512}
+						id='mapbox/streets-v11'
+						accessToken={REACT_APP_ACCESS_TOKEN}
+					/>
+
+					<ChangeMapView coords={position}></ChangeMapView>
+				</MapContainer>
+			) : (
+				''
+			)}
+		</Fragment>
 	);
 };
 

@@ -12,11 +12,15 @@ function App() {
 	useEffect(
 		() =>
 			(async () => {
-				setLoaded(false);
-				let { ip, locationData } = await getIp();
-				setIpAddr(ip);
-				setInfo(locationData);
-				setLoaded(true);
+				try {
+					setLoaded(false);
+					let { ip, locationData } = await getIp();
+					setIpAddr(ip);
+					setInfo(locationData);
+					setLoaded(true);
+				} catch (e) {
+					console.log(e.message);
+				}
 			})(),
 		[]
 	);
@@ -30,6 +34,8 @@ function App() {
 	};
 
 	const { ip, isp, location } = info;
+	const lat = location?.lat;
+	const lng = location?.lng;
 
 	return (
 		<div className='App'>
@@ -43,7 +49,7 @@ function App() {
 				/>
 			</div>
 			<div className='map'>
-				<Map location={location} loaded={loaded} />
+				<Map loaded={loaded} lat={lat} lng={lng}></Map>
 			</div>
 		</div>
 	);
