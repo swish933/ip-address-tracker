@@ -1,6 +1,5 @@
 ![](./src/images/screenshot.png)
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 - Flexbox
 - LeafletJS
 - [React](https://reactjs.org/)
