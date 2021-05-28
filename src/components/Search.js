@@ -12,7 +12,7 @@ const Search = ({ Submit }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (input) {
+		if (input !== '') {
 			Submit(input);
 			setInput('');
 		}
