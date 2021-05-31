@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { icon } from '../util';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 
@@ -7,11 +7,15 @@ const defaultCenter = [0, 0];
 const defaultZoom = 4;
 
 const ChangeMapView = ({ coords }) => {
+	const marker = useRef();
 	const map = useMap();
+	useEffect(() => {
+		marker.current.openPopup();
+	}, []);
 	map.flyTo(coords, 14, { duration: 1.5 });
 	return (
-		<Marker icon={icon} position={coords}>
-			<Popup>You are here</Popup>
+		<Marker icon={icon} position={coords} ref={marker}>
+			<Popup>Right here!</Popup>
 		</Marker>
 	);
 };

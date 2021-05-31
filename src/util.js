@@ -1,6 +1,5 @@
 import L from 'leaflet';
 import markerIcon from './images/icon-location.svg';
-import publicIp from 'public-ip';
 
 const { REACT_APP_API_KEY } = process.env;
 
@@ -8,7 +7,7 @@ export const icon = new L.Icon({
 	iconUrl: markerIcon,
 	iconRetinaUrl: markerIcon,
 	iconAnchor: null,
-	popupAnchor: null,
+	popupAnchor: [0, 0],
 	shadowUrl: null,
 	shadowSize: null,
 	shadowAnchor: null,
@@ -18,7 +17,8 @@ export const icon = new L.Icon({
 
 export const getIp = async () => {
 	try {
-		let ip = await publicIp.v4();
+		let response = await fetch('https://api64.ipify.org?format=json');
+		let { ip } = await response.json();
 		let locationData = await getIpLocation(ip);
 		return locationData;
 	} catch (err) {
@@ -27,15 +27,21 @@ export const getIp = async () => {
 };
 
 export const getIpLocation = async (ip) => {
+	let response, data;
+	let ipTest = new RegExp(
+		/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+	);
 	try {
-		const response = await fetch(
-			`https://geo.ipify.org/api/v1?apiKey=${REACT_APP_API_KEY}&ipAddress=${ip}`
-		);
-
-		if (!response.ok) {
-			throw new Error('Network issue');
+		if (ipTest.test(ip)) {
+			response = await fetch(
+				`https://geo.ipify.org/api/v1?apiKey=${REACT_APP_API_KEY}&ipAddress=${ip}`
+			);
+		} else {
+			response = await fetch(
+				`https://geo.ipify.org/api/v1?apiKey=${REACT_APP_API_KEY}&domain=${ip}`
+			);
 		}
-		const data = await response.json();
+		data = await response.json();
 		return data;
 	} catch (err) {
 		console.log(err.message);
